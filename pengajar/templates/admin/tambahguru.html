@@ -1,0 +1,57 @@
+{% extends "admin/komposisi/main.html" %} {% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card mb-4">
+          <div class="card-body">
+            {% if messages %} {% for pesan in messages %}
+            <div class="alert alert-warning" align="center" >
+              <b>{{pesan}}</b>
+            </div>
+            {% endfor %} {% endif %}
+            <script>
+              window.setTimeout(function () {
+                $(".alert")
+                  .fadeTo(400, 0)
+                  .slideUp(400, function () {
+                    $(this).remove();
+                  });
+              }, 2000);
+            </script>
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleGuruModal">
+              Tambah Guru
+            </button>
+            <table class="table table-bordered" id="fitur">
+              <thead>
+                <tr>
+                  <th>Nama Guru Piket</th>
+                  <th>No.Hp</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for gr in grhtml %}
+                <tr>
+                  <td>{{gr.nama}}</td>
+                  <td>{{gr.hp}}</td>
+                  <td>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleEditGModal-{{forloop.counter}}">
+                    Edit
+                    </button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleHapusGModal-{{forloop.counter}}">
+                      Delete
+                      </button>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% include "admin/modal/bsguru.html" %}
+{% endblock content %}

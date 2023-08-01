@@ -1,0 +1,35 @@
+{% load static %}
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'ProfilWaka' %}">
+        <i class="icon-grid menu-icon"></i>
+        <span class="menu-title">Profil</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'Jadwal' %}">
+        <i class="icon-grid menu-icon"></i>
+        <span class="menu-title">Penjadwalan</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'DaftarGuru' %}">
+        <i class="icon-grid menu-icon"></i>
+        <span class="menu-title">Data Tenaga Akademik</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'id_kode' %}">
+        <i class="icon-grid menu-icon"></i>
+        <span class="menu-title">Tahun,Semester,Kelas</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'AbsensiKinerja' %}">
+        <i class="icon-grid menu-icon"></i>
+        <span class="menu-title">Rekap Kinerja Guru</span>
+      </a>
+    </li>
+  </ul>
+</nav>

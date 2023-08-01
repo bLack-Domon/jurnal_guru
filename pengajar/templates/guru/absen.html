@@ -1,0 +1,98 @@
+{% extends "guru/komposisi/main.html" %} {% block content %}
+<div class="main-panel">
+  <div class="content-wrapper" style="background-color: #eee">
+    <div class="row">
+      <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <form enctype="multipart/form-data" method="post">
+              {% csrf_token %}
+              <h4 class="card-title">
+                Form Jurnal Pengajar (Absensi Kehadiran)
+              </h4>
+              <hr />
+              <input type="hidden" value="{{jadwal.id}}" name="jadwal_id" />
+              <input type="hidden" value="{{request.user.id}}" name="id_guru" />
+              <div class="row">
+                <div class="col">
+                  <div class="mb-3">
+                    <label for=""
+                      >Hari, Kelas - Jam Pelajaran (Keterangan)</label
+                    >
+                    <input type="text" class= "form-control"
+                    value="{{jadwal.hari}}, {{jadwal.kelas.kelas}} -
+                    {{jadwal.jam|time:"H:i"}} ({{jadwal.keterangan}})" disabled
+                    readonly />
+                  </div>
+                </div>
+                <div class="col">
+                  <label for="">Foto Materi/Tugas (**Wajib diisi)</label>
+                  <div class="form-group">
+                    <input
+                      type="file"
+                      name="foto"
+                      class="file-upload-default"
+                      required
+                    />
+                    <div class="input-group col-xs-12">
+                      <input
+                        type="text"
+                        class="form-control file-upload-info"
+                        disabled
+                        placeholder="Pilih Foto tugas / materi"
+                      />
+                      <span class="input-group-append">
+                        <button
+                          class="file-upload-browse btn btn-primary"
+                          type="button"
+                        >
+                          Upload
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for=""
+                  >Pencapaian Materi / Keterangan Tugas Ketika Izin atau Tidak
+                  Masuk</label
+                >
+                <textarea
+                  name="pencapaian"
+                  cols="30"
+                  rows="10"
+                  class="form-control"
+                  required
+                ></textarea>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      value="I"
+                      name="hadir"
+                    />
+                    <label class="form-check-label" for="defaultCheck1">
+                      <span style="margin-left: -25px"
+                        >**Centang jika izin</span
+                      >
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <button type="submit" class="btn btn-primary mr-2">Simpan</button>
+              <a href="{% url 'JurnalMengajar' %}" class="btn btn-danger"
+                >Kembali</a
+              >
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% include "guru/modal/bsabsen.html" %}{% endblock content %}

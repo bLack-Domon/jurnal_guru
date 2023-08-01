@@ -1,0 +1,345 @@
+<div
+  class="modal fade"
+  id="Tambahtahun"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form method="post" action="{% url 'tahunAkademik' %}">
+          {% csrf_token %} 
+          <input type="hidden" name="foto" value="" >
+          <div class="form-group">
+            <label>Tahun Pelajaran</label>
+            <input
+              type="text"
+              class="form-control"
+              name="tahunpelajaran"
+              placeholder="Tahun Pelajaran"
+            />
+            <label class="mt-2">Aktif</label>
+            <input type="checkbox" class='ml-1' style="margin-top: 12px;" name="aktif" value="1">
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-sm-6 mt-2">
+              <input
+                type="submit"
+                class="btn btn-block btn-primary"
+                value="save"
+              />
+            </div>
+            <div class="col-sm-6 mt-2">
+              <input
+                type="reset"
+                class="btn btn-block btn btn-danger"
+                value="cancel"
+                data-dismiss="modal"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="TambahSemester"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form method="post" action="{% url 'Semester' %}">
+          {% csrf_token %} 
+          <input type="hidden" name="foto" value="" >
+          <div class="form-group">
+            <label>Semester</label>
+            <input
+              type="text"
+              class="form-control"
+              name="semester"
+              placeholder="Semester"
+            />
+            <label class="mt-2">Aktif</label>
+            <input type="checkbox" class='ml-1' style="margin-top: 12px;" name="aktif" value="1">
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-sm-6 mt-2">
+              <input
+                type="submit"
+                class="btn btn-block btn-primary"
+                value="save"
+              />
+            </div>
+            <div class="col-sm-6 mt-2">
+              <input
+                type="reset"
+                class="btn btn-block btn btn-danger"
+                value="cancel"
+                data-dismiss="modal"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="TambahKelas"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form method="post" action="{% url 'KELAS' %}">
+          {% csrf_token %} 
+          <input type="hidden" name="foto" value="" >
+          <div class="form-group">
+            <label>Tambah Kelas</label>
+            <input
+              type="text"
+              class="form-control"
+              name="kelas"
+              placeholder="Kelas"
+            />
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-sm-6 mt-2">
+              <input
+                type="submit"
+                class="btn btn-block btn-primary"
+                value="save"
+              />
+            </div>
+            <div class="col-sm-6 mt-2">
+              <input
+                type="reset"
+                class="btn btn-block btn btn-danger"
+                value="cancel"
+                data-dismiss="modal"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--edit piket-->
+{% for gr in kelas %}
+<div
+  class="modal fade"
+  id="EditKelas-{{forloop.counter}}"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form method="post" action="/edit_kelas/{{gr.id}}">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="hidden" name="kelas" value="{{gr.kelas_id}}">
+            <label>kelas</label>
+            <input
+              type="text"
+              class="form-control"
+              name="kelas"
+              value="{{ gr.kelas }}"
+              placeholder="kelas"
+            />
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-sm-6 mt-2">
+              <input
+                type="submit"
+                class="btn btn-block btn-primary"
+                value="save"
+              />
+            </div>
+            <div class="col-sm-6 mt-2">
+              <input
+                type="reset"
+                class="btn btn-block btn btn-danger"
+                value="cancel"
+                data-dismiss="modal"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+{% for gr in tahun %}
+<div
+  class="modal fade"
+  id="EditTahun-{{forloop.counter}}"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form method="post" action="/edit_tahun/{{gr.id}}">
+          {% csrf_token %}
+          <div class="form-group">
+            <label>Tahun Pelajaran</label>
+            <input
+              type="text"
+              class="form-control"
+              name="tahunpelajaran"
+              value={{gr.tahun_pelajaran}}
+              placeholder="Tahun Pelajaran"
+            />
+            <label class="mt-2">Aktif</label>
+            <input type="checkbox" class='ml-1' style="margin-top: 12px;" name="aktif" value="1" {% if gr.aktif == 1 %} checked {% endif %}>
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-sm-6 mt-2">
+              <input
+                type="submit"
+                class="btn btn-block btn-primary"
+                value="save"
+              />
+            </div>
+            <div class="col-sm-6 mt-2">
+              <input
+                type="reset"
+                class="btn btn-block btn btn-danger"
+                value="cancel"
+                data-dismiss="modal"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% for gr in Semester %}
+<div
+  class="modal fade"
+  id="EditSemester-{{forloop.counter}}"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        Edit Semester
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/edit_semester/{{gr.id}}">
+          {% csrf_token %}
+          <div class="form-group">
+            <label>Semester</label>
+            <input
+              type="text"
+              class="form-control"
+              name="semester"
+              value={{gr.nama_semester}}
+              placeholder="semester"
+            />
+            <label class="mt-2">Aktif</label>
+            <input type="checkbox" class='ml-1' style="margin-top: 12px;" name="aktif" value="1" {% if gr.aktif == 1 %} checked {% endif %}>
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-sm-6 mt-2">
+              <input
+                type="submit"
+                class="btn btn-block btn-primary"
+                value="save"
+              />
+            </div>
+            <div class="col-sm-6 mt-2">
+              <input
+                type="reset"
+                class="btn btn-block btn btn-danger"
+                value="cancel"
+                data-dismiss="modal"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% for gr in grhtml %}
+<div
+  class="modal fade"
+  id="exampleHapusGModal-{{forloop.counter}}"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form method="post" action="/hapus_guru/{{gr.id}}">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="hidden" name="user_id" value="{{gr.user_id}}">
+            <label>Nama</label>
+            <input
+              type="text"
+              class="form-control"
+              name="nama"
+              value="{{gr.nama}}"
+              placeholder="Nama Pengguna"
+            />
+            <label class="mt-2">No.Hp</label>
+            <input
+              type="text"
+              class="form-control"
+              name="hp"
+              value={{gr.hp}}
+              placeholder="No.Hp"
+            />
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-sm-6 mt-2">
+              <input
+                type="submit"
+                class="btn btn-block btn-primary"
+                value="Delete"
+              />
+            </div>
+            <div class="col-sm-6 mt-2">
+              <input
+                type="reset"
+                class="btn btn-block btn btn-danger"
+                value="cancel"
+                data-dismiss="modal"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}

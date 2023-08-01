@@ -1,0 +1,93 @@
+{% for jm in jadwalP %}
+<div
+  class="modal fade"
+  id="exampleabsenModal-{{ jm.id }}"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form enctype="multipart/form-data" method="post" action="/jurnal-pengajar/absen/{{jm.id}}">
+          {% csrf_token %}
+          <h4 class="card-title">Form Jurnal Pengajar (Absensi Kehadiran)</h4>
+          <hr />
+          <input type="hidden" value="{{jm.id}}" name="jadwal_id" />
+          <input type="hidden" value="{{request.user.id}}" name="id_guru" />
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <label for="">Hari, Kelas - Jam Pelajaran (Keterangan)</label>
+                <input type="text" class= "form-control" value="{% if jm.hari == 'Monday' %} Senin {% elif jm.hari == 'Tuesday' %} Selasa {% elif jm.hari == 'Wednesday' %} Rabu {% elif jm.hari == 'Thursday' %} Kamis {% else %} Jum'at {% endif %},
+                {{jm.kelas}} - {{jm.jam|time:"H:i"}}
+                (Keterangan jam ke-{{jm.keterangan}})" disabled readonly />
+              </div>
+            </div>
+            <div class="col">
+              <label for="">Foto Materi/Tugas (**Wajib diisi)</label>
+              <div class="form-group">
+                <input
+                  type="file"
+                  name="foto"
+                  class="file-upload-default"
+                  required
+                />
+                <div class="input-group col-xs-12">
+                  <input
+                    type="text"
+                    class="form-control file-upload-info"
+                    disabled
+                    placeholder="Pilih Foto tugas / materi"
+                  />
+                  <span class="input-group-append">
+                    <button
+                      class="file-upload-browse btn btn-primary"
+                      type="button"
+                    >
+                      Upload
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for=""
+              >Pencapaian Materi / Keterangan Tugas Ketika Izin atau Tidak
+              Masuk</label
+            >
+            <textarea
+              name="pencapaian"
+              cols="30"
+              rows="10"
+              class="form-control"
+              required
+            ></textarea>
+          </div>
+          <div class="row">
+            <div class="col ml-4">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  value="I"
+                  name="hadir"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  <span style="margin-left: -25px">**Centang jika izin</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <button type="submit" class="btn btn-primary mr-2">Simpan</button>
+          <a href="{% url 'JurnalMengajar' %}" class="btn btn-danger"
+            >Kembali</a
+          >
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}

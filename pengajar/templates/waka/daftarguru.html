@@ -1,0 +1,67 @@
+{% extends "waka/komposisi/main.html" %} {% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-lg-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Daftar Guru Pengajar</h4>
+
+            <div class="table-responsive">
+              <table class="table table-bordered" id="fitur">
+                <thead>
+                  <tr>
+                    <th>No.id</th>
+                    <th>Nip</th>
+                    <th>Nama Lengkap</th>
+                    <th>No.Hp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for daf in dghtml %}
+                  <tr>
+                    <td>{{daf.user_id}}</td>
+                    <td>{{daf.nip}}</td>
+                    <td>{{daf.nama}}</td>
+                    <td>{{daf.hp}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Daftar Guru Piket</h4>
+            <div class="table-responsive">
+              <table class="table table-bordered" id="fitur2">
+                <thead>
+                  <tr>
+                    <th>No.id</th>
+                    <th>Nip</th>
+                    <th>Nama Lengkap</th>
+                    <th>No.Hp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for dew in dgphtml %}
+                  <tr>
+                    <td>{{dew.user_id}}</td>
+                    <td>{{dew.nip}}</td>
+                    <td>{{dew.nama}}</td>
+                    <td>{{dew.hp}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
+</div>

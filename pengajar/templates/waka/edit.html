@@ -1,0 +1,72 @@
+{% extends "waka/komposisi/EditMain.html" %} {% block content %}
+<div class="main-panel">
+  <div class="content-wrapper" style="background-color: #eee">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">
+              <i class="ti-pencil-alt"></i> Edit Jadwal
+            </h4>
+            <form method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col">
+                  <label for="">Hari</label>
+                  {{form.hari}}
+                </div>
+                <div class="col">
+                  <label for="">kelas</label>
+                  {{form.kelas}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="">Jam</label>
+                  {{form.jam}}
+                </div>
+                <div class="col">
+                  <label for="">Keterangan</label>
+                  {{form.keterangan}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="">Guru</label>
+                  {{form.guru}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="">Tahun Pelajaran</label>
+                  {{form.tahun_pelajaran}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="">Semester</label>
+                  {{form.semester}}
+                </div>
+              </div>
+              <div class="row justify-content-end">
+                <div class="col-sm-6 mt-2">
+                  <input
+                    type="submit"
+                    class="btn btn-block btn-primary"
+                    value="save"
+                  />
+                </div>
+                <div class="col-sm-6 mt-2">
+                  <a href="{% url 'Jadwal' %}" class="btn btn-danger btn-block"
+                    >Cancel</a
+                  >
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

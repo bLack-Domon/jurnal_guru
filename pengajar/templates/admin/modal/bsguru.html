@@ -1,0 +1,203 @@
+<div
+  class="modal fade"
+  id="exampleGuruModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form method="post" action="{% url 'tambahP' %}">
+          {% csrf_token %} {{ guru }}
+          <input type="hidden" name="foto" value="" >
+          <div class="form-group">
+            <label>Username</label>
+            <input
+              type="text"
+              class="form-control"
+              name="username"
+              placeholder="Nama Pengguna"
+            />
+            <label class="mt-2">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              placeholder="Kata Sandi"
+            />
+            <label class="mt-2">Repeat Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password2"
+              placeholder="Ulangi Kata Sandi"
+            />
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-sm-6 mt-2">
+              <input
+                type="submit"
+                class="btn btn-block btn-primary"
+                value="save"
+              />
+            </div>
+            <div class="col-sm-6 mt-2">
+              <input
+                type="reset"
+                class="btn btn-block btn btn-danger"
+                value="cancel"
+                data-dismiss="modal"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--edit piket-->
+{% for gr in grhtml %}
+<div
+  class="modal fade"
+  id="exampleEditGModal-{{forloop.counter}}"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form method="post" action="/edit_guru/{{gr.id}}">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="hidden" name="user_id" value="{{gr.user_id}}">
+            <label>Nama</label>
+            <input
+              type="text"
+              class="form-control"
+              name="nama"
+              value="{{ gr.nama }}"
+              placeholder="Nama Pengguna"
+            />
+            <label class="mt-2">Nip</label>
+            <input
+              type="text"
+              class="form-control"
+              name="nip"
+              value={{ gr.nip }}
+              placeholder="nip"
+            />
+            <label class="mt-2">No.Hp</label>
+            <input
+              type="text"
+              class="form-control"
+              name="hp"
+              value="{{ gr.hp }}"
+              placeholder="No.Hp"
+            />
+          </div>
+          <div class="form-group">
+            <label>Username</label>
+            <input
+              type="text"
+              class="form-control"
+              name="username"
+              value="{{ gr.user.username }}"
+              placeholder="Nama Pengguna"
+            />
+            <label class="mt-2">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              placeholder="Kata Sandi"
+            />
+            <label class="mt-2">Repeat Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password2"
+              placeholder="Ulangi Kata Sandi"
+            />
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-sm-6 mt-2">
+              <input
+                type="submit"
+                class="btn btn-block btn-primary"
+                value="save"
+              />
+            </div>
+            <div class="col-sm-6 mt-2">
+              <input
+                type="reset"
+                class="btn btn-block btn btn-danger"
+                value="cancel"
+                data-dismiss="modal"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% for gr in grhtml %}
+<div
+  class="modal fade"
+  id="exampleHapusGModal-{{forloop.counter}}"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form method="post" action="/hapus_guru/{{gr.id}}">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="hidden" name="user_id" value="{{gr.user_id}}">
+            <label>Nama</label>
+            <input
+              type="text"
+              class="form-control"
+              name="nama"
+              value="{{gr.nama}}"
+              placeholder="Nama Pengguna"
+            />
+            <label class="mt-2">No.Hp</label>
+            <input
+              type="text"
+              class="form-control"
+              name="hp"
+              value={{gr.hp}}
+              placeholder="No.Hp"
+            />
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-sm-6 mt-2">
+              <input
+                type="submit"
+                class="btn btn-block btn-primary"
+                value="Delete"
+              />
+            </div>
+            <div class="col-sm-6 mt-2">
+              <input
+                type="reset"
+                class="btn btn-block btn btn-danger"
+                value="cancel"
+                data-dismiss="modal"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}

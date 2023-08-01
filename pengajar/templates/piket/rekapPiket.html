@@ -1,0 +1,44 @@
+{% extends "piket/komposisi/main.html" %}
+
+{% block content %}
+<div class="main-panel">
+<div class="content-wrapper">
+<div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Rekapan Piket</h4>
+                  <hr>
+                  <div class="table-responsive">
+                    <table class="table table-bordered" id="tombol">
+                      <thead>
+                        <tr>
+                          <th>Nama Guru Piket</th>
+                          <th>Nama Pengajar</th>
+                          <th>Tanggal</th>
+                          <th>Hari, (Kelas - jam )</th>
+                          <th>Status (Hadir/Izin)</th>
+                          <th>Pencapaian Materi/Tugas</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for rekp in rekap %}
+                        <tr class="{% if rekp.hadir == "I" %} table-warning {% elif rekp.hadir == "H" %} table-success {% else %} table-danger {% endif %}">
+                        <td>{{piket.nama}}</td>
+                        <td>{{rekp.jadwal.guru.nama}}</td>
+                        <td>{% if rekp.tanggal_absen|date:"l" == 'Monday' %} Senin {% elif rekp.tanggal_absen|date:"l" == 'Tuesday' %} Selasa {% elif rekp.tanggal_absen|date:"l" == 'Wednesday' %} Rabu {% elif rekp.tanggal_absen|date:"l" == 'Thursday' %} Kamis {% else %} Jum'at {% endif %}, {{rekp.tanggal_absen|date:"d N Y"}}</td>
+
+                        <td>{% if rekp.jadwal.hari == 'Monday' %} Senin {% elif rekp.jadwal.hari == 'Tuesday' %} Selasa {% elif rekp.jadwal.hari == 'Wednesday' %} Rabu {% elif rekp.jadwal.hari == 'Thursday' %} Kamis {% else %} Jum'at {% endif %}, ({{rekp.jadwal.kelas.kelas}} - {{rekp.jadwal.jam|time:"H:i"}})</td>
+                        
+                        <td>{% if rekp.hadir == 'H' %} Hadir {% elif rekp.hadir == 'I' %} Izin {% else %} Terlambat Masuk {% endif %}</td>
+                        <td>{{rekp.pencapaian}}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+</div>
+{% endblock content %}

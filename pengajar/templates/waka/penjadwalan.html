@@ -1,0 +1,143 @@
+{% extends "waka/komposisi/main.html" %} {% load crispy_forms_tags %} {% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            {% if messages %} {% for message in messages %}
+            <div
+              class="alert alert-warning alert-dismissible fade show"
+              role="alert"
+              align="center"
+            >
+              {{message}}
+              <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endfor %} {% endif %}
+            <script>
+              window.setTimeout(function () {
+                $(".alert")
+                  .fadeTo(400, 0)
+                  .slideUp(400, function () {
+                    $(this).remove();
+                  });
+              }, 2000);
+            </script>
+            <h4 class="card-title">
+              Jadwal Pelajaran
+              
+              <a href="https://docs.google.com/spreadsheets/d/1AIzvUXZbe-ppbPyT2MVdV5JbSJhXHBg3/edit?usp=sharing&ouid=117224154774132509737&rtpof=true&sd=true" target="_blank">
+                <button
+                  type="button"
+                  class="btn btn-success btn-icon-text"
+                  data-toggle="modal"
+                  style="margin-left: 430px"
+                >
+                  <i class="ti-clipboard btn-icon-prepend"></i>
+                  Template Jadwal (**Excel)
+                </button>
+              </a>
+              <button
+                type="button"
+                class="btn btn-warning btn-icon-text"
+                data-toggle="modal"
+                data-target="#TambahJadwalModal"
+                style="margin-left: 5px"
+              >
+                <i class="ti-plus btn-icon-prepend"></i>
+                Tambah Jadwal
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-danger btn-icon-text"
+                data-toggle="modal"
+                data-target="#examplejadwalModal"
+                style="margin-left: 5px"
+              >
+                <i class="ti-upload btn-icon-prepend"></i>
+                Import Jadwal
+              </button>
+            </h4>
+            <div class="mt-3 mb-4">
+              <form method="get">
+                <div class="row justify-content-end">
+                  <div class="col-md-3">
+                    {{ filter_jadwal.form.tahun_pelajaran|as_crispy_field }}
+                  </div>
+                  <div class="col-md-3">
+                    {{ filter_jadwal.form.semester|as_crispy_field }}
+                  </div>
+                  <div class="col-auto">
+                    <button class="btn btn-primary" style="margin-top: 30px;" type="submit"><i class="ti-filter mr-1"></i>Filter</button>
+                  </div>
+                </div>
+               </form>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-bordered" id="fitur">
+                <thead>
+                    <th>Nomer</th>
+                    <th>Hari</th>
+                    <th>Jam(keterangan)</th>
+                    <th>Kelas</th>
+                    <th>Nama Guru</th>
+                    <th>No.HP</th>
+                    <th>Tahun Pelajaran</th>
+                    <th>Semester</th>
+                    <th>Aksi</th>
+                </thead>
+                <tbody>
+                  {% for Jadwal in jadwalhtml %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>
+                      {% if Jadwal.hari == 'Monday' %} Senin {% elif Jadwal.hari == 'Tuesday' %} Selasa {% elif Jadwal.hari == 'Wednesday' %} Rabu {% elif Jadwal.hari == 'Thursday' %} Kamis {% else %} Jum'at {% endif %}
+                    </td>
+                    <td>
+                      Jam ke-{{Jadwal.keterangan}} - pukul
+                      {{Jadwal.jam|time:"H:i"}} wib
+                    </td>
+                    <td>{{Jadwal.kelas.kelas}}</td>
+                    <td>{{Jadwal.guru.nama}}</td>
+                    <td>{{Jadwal.guru.hp}}</td>
+                    <td>{{Jadwal.tahun_pelajaran}}</td>
+                    <td>{{Jadwal.semester}}</td>
+                    <td>
+                      <a
+                        href="{% url 'EditJadwal' Jadwal.id %}"
+                        style="border-radius: 5px"
+                        type="button"
+                        class="btn-warning text-black p-1"
+                        ><i class="ti-pencil-alt" style="font-size: 30px"></i
+                      ></a>
+                      <button
+                        type="button"
+                        class="btn-danger"
+                        style="border-radius: 5px"
+                        data-toggle="modal"
+                        data-target="#hapusModal-{{Jadwal.id}}"
+                      >
+                        <i class="ti-trash mr-1" style="font-size: 30px"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% include "waka/modal/bsjadwal.html" %} {% endblock content %}

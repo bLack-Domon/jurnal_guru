@@ -1,0 +1,70 @@
+{% extends "guru/komposisi/main.html" %} {% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">
+              Jurnal Guru Pengajar - Hari 
+              ( 
+                {% if cekhari == 'Monday' %}
+                Senin 
+                {% elif cekhari == 'Tuesday' %}
+                Selasa 
+                {% elif cekhari == 'Wednesday' %}
+                Rabu
+                {% elif cekhari == 'Thursday' %}
+                Kamis 
+                {% elif cekhari == 'Friday' %}
+                Jum'at
+                {% else %}
+                Sabtu dan Minggu Hari Libur 
+                {% endif %} 
+              )
+            </h4>
+            <div class="table-responsive">
+              <table class="table table-bordered" id="fitur">
+                <thead>
+                  <tr>
+                    <th>Nama Guru</th>
+                    <th>Hari</th>
+                    <th>Kelas - jam</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for jm in jadwalP %}
+                  <tr>
+                    <td>{{jm.guru.nama}}</td>
+                    <td>
+                      {% if jm.hari == 'Monday' %} Senin
+                      {% elif jm.hari == 'Tuesday' %} Selasa
+                      {% elif jm.hari == 'Wednesday' %} Rabu
+                      {% elif jm.hari == 'Thursday' %} Kamis
+                      {% else %}
+                      Jum'at
+                      {% endif %}
+                    </td>
+                    <td>{{jm.kelas.kelas}}-{{jm.jam|time:"H,i"}}</td>
+                    <td>
+                      <button type="button" class="p-2 btn btn-success btn-icon-text" data-toggle="modal" data-target="#exampleabsenModal-{{jm.id}}" >
+                        <span style="font-size: 20px;">
+                          <i style="font-size: 20px;" class="mdi mdi-arrange-send-backward"></i>
+                          Presensi
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% include "guru/modal/bsabsen.html" %}
+{% endblock content %}

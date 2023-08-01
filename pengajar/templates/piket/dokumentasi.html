@@ -1,0 +1,69 @@
+{% extends "piket/komposisi/main.html" %} {% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Form Dokumentasi Guru Piket</h4>
+            <hr />
+            <input type="hidden" class="form-control" value="{{dokpi.id}}" name="jadwal">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="my-3">
+                  <label for="">Nama Pengajar</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="Dewi Agustianingsi"
+                    disabled
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="my-3">
+                  <label for="">Mata Pelajaran</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{dokpi.mapel}}"
+                    disabled
+                    readonly
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="my-3">
+              <label for="">Hari, Kelas - Jam Pelajaran (keterangan)</label>
+              <input
+                type="text"
+                class="form-control"
+                value="{{dokpi.hari}}, {{dokpi.kelas}}-{{dokpi.jam|time:"H.i"}}, ({{dokpi.keterangan}})"
+                disabled
+                readonly
+              />
+            </div>
+            <div class="my-3">
+              <label for="">Kehadiran</label>
+              <input
+                type="text"
+                class="form-control"
+                value="Hadir"
+                disabled
+                readonly
+              />
+            </div>
+            <div class="my-3">
+              <label for="">Foto Dokumentasi / Bukti Tugas & Materi</label>
+              <input type="file" name="foto" class="form-control-file"/>
+            </div>
+            <button type="submit" class="btn btn-primary mr-2">Simpan</button>
+            <button type="submit" class="btn btn-danger mr-2">Kembali</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

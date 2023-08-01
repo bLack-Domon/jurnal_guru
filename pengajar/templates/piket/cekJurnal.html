@@ -1,0 +1,54 @@
+{% extends "piket/komposisi/main.html" %} {% block content %}
+<div class="main-panel">
+  <div class="content-wrapper" style="background-color: #eee">
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Cek Jurnal Pengajar</h4>
+            <div class="table-responsive">
+              <table class="table table-bordered" id="fitur">
+                <thead>
+                  <tr>
+                    <th style="font-size: 16px;">Nama Guru</th>
+                    <th style="font-size: 16px;">Hari, (Kelas - jam )</th>
+                    <th style="font-size: 16px;">Keterangan Kehadiran</th>
+                    <th style="font-size: 16px;">Pencapaian Materi/Tugas</th>
+                    <th style="font-size: 16px;">Download Tugas</th>
+                    <th style="font-size: 16px;">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for d in data %}
+                  <tr class="{% if d.hadir == "I" %} table-warning {% elif d.hadir == 'H'%} table-success {% else %} table-danger {% endif %}">
+                  <td>{{d.jadwal.guru.nama}}</td>
+                  <td>{{d.jadwal.hari}}, ({{d.jadwal.kelas.kelas}} - {{d.jadwal.jam|time:"H:i"}})</td>
+                  <td>{% if d.hadir == 'H' %} Hadir {% elif d.hadir == 'I'%} Izin {% else %} Terlambat Masuk {% endif %}</td>
+                  <td>{{d.pencapaian}}</td>
+                  <td><a href="{{d.foto_guru}}" target="_blank"><button
+                    type="button"
+                    class="btn btn-success btn-icon-text"
+                    data-toggle="modal"
+                    style="margin-left: 20px"
+                  >
+                    <i class="ti-clipboard btn-icon-prepend"></i>
+                    Download
+                  </button></a></td>
+                  <td class="text-center">
+                    <button type="button" class="btn-light text-dark" style="border-radius: 5px;" data-toggle="modal" data-target="#dokumentasiModal-{{d.id}}">
+                      <i class="ti-pencil-alt" style="font-size: 16px;"></i>
+                    </button>
+                  </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% include 'piket/modal/bsdokumentasi.html' %}
+{% endblock content %}

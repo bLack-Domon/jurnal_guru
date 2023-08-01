@@ -1,0 +1,40 @@
+{% for jw in kinerja %}
+<div
+  class="modal fade"
+  id="detailModal-{{jw.id}}"
+  tabindex="-1"
+  aria-labelledby="detailModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cek Dokumentasi dari Pengajar dan Guru Piket </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span arial-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <p class="card-text"><b>Foto Dokumentasi Guru Pengajar</b></p>
+              </div>
+              <img src="{{jw.foto_guru}}" class="card-img-top" alt="...."/>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <p class="card-text"><b>Foto Dokumentasi Guru Piket</b></p>
+              </div>
+              <img src="{{jw.foto_piket}}" class="card-img-top" alt="..."/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}

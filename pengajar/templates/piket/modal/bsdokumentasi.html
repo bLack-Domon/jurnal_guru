@@ -1,0 +1,62 @@
+{% for d in data %}
+<div
+  class="modal fade"
+  id="dokumentasiModal-{{d.id}}"
+  tabindex="-1"
+  aria-labelledby="profilModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+   <div class="modal-content">
+    <div class="modal-body">
+     <form method="post" enctype="multipart/form-data" action="{% url 'DokP' %}">
+      {% csrf_token %}
+      <input type="hidden" name="id_absen" value="{{d.id}}">
+      <input type="hidden" name="hadir" value="{{d.hadir}}">
+      <input type="hidden" name="foto_guru" value="{{d.foto_guru}}">
+      <input type="hidden" name="pencapaian" value="{{d.pencapaian}}">
+      <input type="hidden" name="jadwal_id" value="{{d.jadwal_id}}">
+      <input type="hidden" name="tanggal_absen" value="{{d.tanggal_absen}}">
+      <input type="hidden" name="id_guru" value="{{d.id_guru}}">
+      <input type="hidden" name="id_piket" value="{{request.user.id}}">
+      <div class="row">
+       <div class="col">
+        <label for="">Nama Guru</label>
+        <input type="text" class="form-control" value="{{d.jadwal.guru.nama}}" disabled>
+       </div>
+       <div class="col">
+        <label for="">Hari, Kelas - Jam (Keterangan)</label>
+        <input type="text" class="form-control" value="{{d.jadwal.hari}}, {{d.jadwal.kelas.kelas}} - {{d.jadwal.jam}} ({{d.jadwal.keterangan}})" disabled>
+       </div>
+      </div>
+      <div class="row mt-2">
+       <div class="col">
+        <label for="">Status Kehadiran</label>
+        <input type="text" class="form-control" value="{% if d.hadir == "I" %} Izin{% elif d.hadir == "H" %} Hadir {% else %} Terlambat Masuk {% endif %}" disabled>
+       </div>
+      </div>
+      <hr />
+      <div class="form-group mt-3">
+       <label for="">Upload Dokumentasi (**wajib diisi)</label>
+       <input type="file" name="foto" class="file-upload-default" required/>
+       <div class="input-group col xs-12">
+        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload foto bukti materi / tugas...."/>
+        <span class="input-group-append">
+         <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+        </span>
+       </div>
+      </div>
+      <div class="row justify-content-end">
+       <div class="col-sm-6 mt-2">
+        <input type="submit" class="btn btn-block btn-primary" value="Save" />
+       </div>
+       <div class="col-sm-6 mt-2">
+        <input type="button" class="btn btn-block btn-danger" value="Cancel" data-dismiss="modal"/>
+       </div>
+      </div>
+     </form>
+    </div>
+   </div>
+  </div>
+</div>
+{% endfor %}

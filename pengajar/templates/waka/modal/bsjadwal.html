@@ -1,0 +1,255 @@
+<div
+  class="modal fade"
+  id="examplejadwalModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <h3>Upload Jadwal</h3>
+          </div>
+        </div>
+        <hr>
+        <form
+          enctype="multipart/form-data"
+          action="{% url 'Jadwal' %}"
+          method="post"
+        >
+          {% csrf_token %}
+          <div class="my-3">
+            <label for="">Upload Jadwal</label>
+            <input type="file" name="file" class="form-control-file" />
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-sm-6 mt-2">
+              <input
+                type="submit"
+                class="btn btn-block btn-primary"
+                value="save"
+              />
+            </div>
+            <div class="col-sm-6 mt-2">
+              <input
+                type="reset"
+                class="btn btn-block btn btn-danger"
+                value="cancel"
+                data-dismiss="modal"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="TambahJadwalModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <h3>Tambah Jadwal Baru</h3>
+          </div>
+        </div>
+        <hr>
+        <form method="post" action="{% url 'tambahJadwal' %}">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col">
+              <label for="">Hari</label>
+              {{form.hari}}
+            </div>
+            <div class="col">
+              <label for="">kelas</label>
+              {{form.kelas}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="">Jam</label>
+              {{form.jam}}
+            </div>
+            <div class="col">
+              <label for="">Keterangan</label>
+              {{form.keterangan}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="">Guru</label>
+              {{form.guru}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="">Tahun Pelajaran</label>
+              {{form.tahun_pelajaran}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="">Semester</label>
+              {{form.semester}}
+            </div>
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-sm-6 mt-2">
+              <input
+                type="submit"
+                class="btn btn-block btn-primary"
+                value="save"
+              />
+            </div>
+            <div class="col-sm-6 mt-2">
+              <input
+                type="reset"
+                class="btn btn-block btn btn-danger"
+                value="cancel"
+                data-dismiss="modal"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit jadwal -->
+ {% comment %} {% for ej in jadwalhtml %}
+<div
+  class="modal fade"
+  id="exampleEditModal-{{forloop.counter}}"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form method="post" action="/edit_jadwal/{{ej.id}}">
+          {% csrf_token %}
+          <div class="form-group">
+            <label>Hari</label>
+            <input
+              type="text"
+              class="form-control"
+              name="hari"
+              value="{{ ej.hari }}"
+              placeholder="Hari"
+            />
+            <div class="row">
+              <div class="col">
+                <input type="hidden" name="jamlama" value="{{ej.jam|time:"H:i:s:ss"}}">
+                <label class="mt-2">Jam Sebelumnya</label>
+                <input
+                  type="text"
+                  value="{{ej.jam}}"
+                  class="form-control"
+                  disabled
+                />
+              </div>
+              <div class="col">
+                <label class="mt-2">Edit Jam Pelajaran</label>
+                <input
+                  type="time"
+                  name="jam"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <label class="mt-2">Keterangan</label>
+            <input
+              type="text"
+              class="form-control"
+              name="keterangan"
+              value="{{ ej.keterangan}}"
+              placeholder="keterangan"
+            />
+            <label class="mt-2">guru</label>
+            <input
+              type="text"
+              class="form-control"
+              name="guru_id"
+              value="{{ej.guru}}"
+              placeholder="guru"
+            />
+            <label class="mt-2">Kelas</label>
+            <input
+              type="text"
+              class="form-control"
+              name="kelas"
+              value="{{ ej.kelas}}"
+              placeholder="kelas"
+            />
+            <label class="mt-2">Tahun Pelajaran</label>
+            <input
+              type="text"
+              class="form-control"
+              name="kelas"
+              value="{{ ej.tahun_pelajaran}}"
+              placeholder="kelas"
+            />
+            <label class="mt-2">Semester</label>
+            <input
+              type="text"
+              class="form-control"
+              name="kelas"
+              value="{{ ej.semester}}"
+              placeholder="kelas"
+            />
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-sm-6 mt-2">
+             <input type="submit" class="btn btn-block btn-primary" value="Save" />
+            </div>
+            <div class="col-sm-6 mt-2">
+             <input type="button" class="btn btn-block btn-danger" value="Cancel" data-dismiss="modal"/>
+            </div>
+           </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}   {% endcomment %}
+
+{% for jw in jadwalhtml %}
+<div id="hapusModal-{{ jw.id }}" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="/hapus_jadwal/{{jw.id}}" method="POST">
+        {% csrf_token %}
+        <div class="modal-body text-center">
+          <p>Are you sure you want to delete these Records?</p>
+          <hr />
+          <p>
+            <b><h4>{{jw.guru.nama}}</h4></b>
+          </p>
+          <p class="text-danger">This action cannot be undone</p>
+          <hr/>
+          <div class="row justify-content-end">
+            <div class="col-sm-6 mt-2">
+              <input type="submit" class="btn btn-block btn-primary" value="Delete"/>
+            </div>
+            <div class="col-sm-6 mt-2">
+                <input type="button" class="btn btn-block btn-danger" value="Cancel" data-dismiss="modal"/>
+              </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endfor %}

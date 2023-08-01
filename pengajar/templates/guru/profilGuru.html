@@ -1,0 +1,63 @@
+{% extends "guru/komposisi/main.html" %}
+{% load static %}
+{% block content %}
+<div class="main-panel">
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card mb-4">
+        <div class="card-body text-center">
+          <img src="{{data.foto}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px"
+          />
+          <h5 class="my-3">{{data.nama}}</h5>
+          <p class="text-muted mb-1">Nip : {{data.nip}}</p>
+          <p class="text-muted mb-4">No.Hp : {{data.hp}}</p>
+          <div class="d-flex justify-content-center mb-2">
+            <button type="button" class="btn btn-primary mr-1" data-toggle="modal" data-target="#settingModal-{{data.id}}"><i class="ti-settings"></i>Setting</button>
+            <button type="button" class="btn btn-warning ml-1" data-toggle="modal" data-target="#profilModal-{{data.id}}"><i class="ti-user"></i>Upload Profil</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="row">
+        <div class="col-md-4 mb-4 stretch-card transparent">
+          <div class="card card-light-blue">
+            <div class="card-body">
+              <p class="mb-4">Total Hadir Masuk</p>
+              <p class="fs-30 mb-2">{{hadir}} Hari</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 stretch-card transparent">
+          <div class="card card-light-blue">
+            <div class="card-body">
+              <p class="mb-4">Total Izin</p>
+              <p class="fs-30 mb-2">{{izin}} Hari</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 stretch-card transparent">
+          <div class="card card-light-danger">
+            <div class="card-body">
+              <p class="mb-4">Total Terlambat Masuk</p>
+              <p class="fs-30 mb-2">{{lambat}} Hari</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 stretch-card">
+          <div class="card tale-bg">
+            <div class="card-people mt-auto">
+              <img src="{% static 'skydash/images/dashboard/people.svg' %}" alt="people">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% include "guru/modal/bsprofilguru.html" %}
+{% endblock content %}

@@ -1,0 +1,84 @@
+{% extends "waka/komposisi/main.html" %} {% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">ID TAHUN</h4>
+
+            <div class="table-responsive">
+              <table class="table table-bordered" id="idkode1">
+                <thead>
+                  <tr>
+                    <th>No.id</th>
+                    <th>Tahun Pelajaran</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for daf in tahun %}
+                  <tr>
+                    <td>{{daf.id}}</td>
+                    <td>{{daf.tahun_pelajaran}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">ID SEMESTER</h4>
+            <div class="table-responsive">
+              <table class="table table-bordered" id="idkode2">
+                <thead>
+                  <tr>
+                    <th>No.id</th>
+                    <th>Semester</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for s in semester %}
+                  <tr>
+                    <td>{{s.id}}</td>
+                    <td>{{s.nama_semester}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">ID KELAS</h4>
+            <div class="table-responsive">
+              <table class="table table-bordered" id="idkode3">
+                <thead>
+                  <tr>
+                    <th>No.id</th>
+                    <th>KELAS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for k in kelas %}
+                  <tr>
+                    <td>{{k.id}}</td>
+                    <td>{{k.kelas}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
+</div>

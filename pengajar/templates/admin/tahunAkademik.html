@@ -1,0 +1,152 @@
+{% extends "admin/komposisi/main.html" %} {% block content %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-lg-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">TAHUN PELAJARAN</h4>
+            <button
+              type="button"
+              class="btn btn-primary mb-3"
+              data-toggle="modal"
+              data-target="#Tambahtahun"
+            >
+              Tambah Tahun
+            </button>
+            <div class="table-responsive">
+              <table class="table table-bordered" id="fitur">
+                <thead>
+                  <tr>
+                    <th>Tahun Pelajaran</th>
+                    <th>Aktif</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for daf in tahun %}
+                  <tr>
+                    <td>{{daf.tahun_pelajaran}}</td>
+                    <td>{{daf.aktif}}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-warning"
+                        data-toggle="modal"
+                        data-target="#EditTahun-{{forloop.counter}}"
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">SEMESTER</h4>
+            <button
+              type="button"
+              class="btn btn-primary mb-3"
+              data-toggle="modal"
+              data-target="#TambahSemester"
+            >
+              Tambah Semester
+            </button>
+            <div class="table-responsive">
+              <table class="table table-bordered" id="fitur2">
+                <thead>
+                  <tr>
+                    <th>Semester</th>
+                    <th>Aktif</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for dew in Semester %}
+                  <tr>
+                    <td>{{dew.nama_semester}}</td>
+                    <td>{{dew.aktif}}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-warning"
+                        data-toggle="modal"
+                        data-target="#EditSemester-{{forloop.counter}}"
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            {% if messages %} {% for pesan in messages %}
+            <div class="alert alert-warning" align="center">
+              <b>{{pesan}}</b>
+            </div>
+            {% endfor %} {% endif %}
+            <script>
+              window.setTimeout(function () {
+                $(".alert")
+                  .fadeTo(400, 0)
+                  .slideUp(400, function () {
+                    $(this).remove();
+                  });
+              }, 2000);
+            </script>
+            <h4 class="card-title">KELAS</h4>
+            <button
+              type="button"
+              class="btn btn-primary mb-3"
+              data-toggle="modal"
+              data-target="#TambahKelas"
+            >
+              Tambah Kelas
+            </button>
+            <div class="table-responsive">
+              <table class="table table-bordered" id="fitur3">
+                <thead>
+                  <tr>
+                    <th>Kelas</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for dew in kelas %}
+                  <tr>
+                    <td>{{dew.kelas}}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-warning"
+                        data-toggle="modal"
+                        data-target="#EditKelas-{{forloop.counter}}"
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% include "admin/modal/bstahunAkademik.html" %} {% endblock content %}

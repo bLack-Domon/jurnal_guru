@@ -1,0 +1,46 @@
+{% extends "waka/komposisi/main.html" %}
+
+{% block content %}
+<div class="main-panel">
+<div class="content-wrapper">
+<div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Rekap Kinerja Guru</h4>
+                  <hr>
+                  <div class="table-responsive">
+                    <table class="table table-bordered" id="fitur">
+                      <thead>
+                        <tr>
+                          <th style="font-size: 16px;">Nama Guru</th>
+                          <th style="font-size: 16px;">Tanggal</th>
+                          <th style="font-size: 16px;">Hari, (Kelas - jam )</th>
+                          <th style="font-size: 16px;">Keterangan Kehadiran</th>
+                          <th style="font-size: 16px;">Pencapaian Materi/Tugas</th>
+                          <th style="font-size: 16px;">Aksi</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for d in kinerja %}
+                        <tr class="{% if d.hadir == "I" %} table-warning {% elif d.hadir == 'H'%} table-success {% else %} table-danger {% endif %}">
+                        <td>{{d.jadwal.guru.nama}}</td>
+                        <td>{% if rekp.tanggal_absen|date:"l" == 'Monday' %} Senin {% elif rekp.tanggal_absen|date:"l" == 'Tuesday' %} Selasa {% elif rekp.tanggal_absen|date:"l" == 'Wednesday' %} Rabu {% elif rekp.tanggal_absen|date:"l" == 'Thursday' %} Kamis {% else %} Jum'at {% endif %}, {{d.tanggal_absen|date:"d N Y"}}</td>
+                        <td>{% if rekp.jadwal.hari == 'Monday' %} Senin {% elif rekp.jadwal.hari == 'Tuesday' %} Selasa {% elif rekp.jadwal.hari == 'Wednesday' %} Rabu {% elif rekp.jadwal.hari == 'Thursday' %} Kamis {% else %} Jum'at {% endif %}, ({{d.jadwal.kelas.kelas}} - {{d.jadwal.jam|time:"H:i"}})</td>
+                        <td>{% if d.hadir == 'H' %} Hadir {% elif d.hadir == 'I'%} Izin {% else %} Terlambat Masuk {% endif %}</td>
+                        <td>{{d.pencapaian}}</td>
+                        <td class="text-center">
+                          <button type="button" class="btn-light text-dark" style="border-radius: 5px;" data-toggle="modal" data-target="#detailModal-{{d.id}}">
+                            <i class="ti-pencil-alt" style="font-size: 16px;"></i>
+                          </button>
+                        </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+</div>
+{% include "waka/modal/bskinerja.html" %}{% endblock content %}

@@ -1,0 +1,137 @@
+<div
+  class="modal fade"
+  id="settingModal-{{data.id}}"
+  tabindex="-1"
+  aria-labelledby="settingModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form method="post" action="{% url 'ProfilPiket' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="hidden" name="id_piket" value="{{data.id}}" />
+            <input type="hidden" name="user_id" value="{{data.user_id}}" />
+            <input type="hidden" name="foto" value="{{data.foto}}" />
+            <label>Nama</label>
+            <input
+              type="text"
+              class="form-control"
+              name="nama"
+              value="{{ data.nama }}"
+              placeholder="Nama Pengguna"
+            />
+            <label class="mt-2">Nip</label>
+            <input
+              type="text"
+              class="form-control"
+              name="nip"
+              value="{{ data.nip }}"
+              placeholder="nip"
+            />
+            <label class="mt-2">No.Hp</label>
+            <input
+              type="text"
+              class="form-control"
+              name="hp"
+              value="{{ data.hp }}"
+              placeholder="No.Hp"
+            />
+          </div>
+          <div class="form-group">
+            <label>Username</label>
+            <input
+              type="text"
+              class="form-control"
+              name="username"
+              value="{{ data.user.username }}"
+              placeholder="Nama Pengguna"
+            />
+            <label class="mt-2">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              placeholder="Kata Sandi"
+            />
+            <label class="mt-2">Repeat Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password2"
+              placeholder="Ulangi Kata Sandi"
+            />
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-sm-6 mt-2">
+              <input
+                type="submit"
+                class="btn btn-block btn-primary"
+                value="save"
+              />
+            </div>
+            <div class="col-sm-6 mt-2">
+              <input
+                type="reset"
+                class="btn btn-block btn btn-danger"
+                value="cancel"
+                data-dismiss="modal"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="profilModal-{{data.id}}"
+  tabindex="-1"
+  aria-labelledby="profilModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form method="post" enctype="multipart/form-data" action="{% url 'uploadprofilPiket' %}">
+        {% csrf_token %}
+        <input type="hidden" name="id_piket" value="{{data.id}}">
+        <input type="hidden" name="nama" value="{{data.nama}}">
+        <input type="hidden" name="hp" value="{{data.hp}}">
+        <input type="hidden" name="nip" value="{{data.nip}}">
+        <input type="hidden" name="user_id" value="{{data.user_id}}">
+        <div class="form-group">
+          <label>Upload Foto Profil</label>
+          <input type="file" name="foto" class="file-upload-default">
+          <div class="input-group col-xs-12">
+            <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Foto jika ingin dirubah">
+            <span class="input-group-append">
+              <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+            </span>
+          </div>
+        </div>
+        <div class="row justify-content-end">
+          <div class="col-sm-6 mt-2">
+            <input
+              type="submit"
+              class="btn btn-block btn-primary"
+              value="save"
+            />
+          </div>
+          <div class="col-sm-6 mt-2">
+            <input
+              type="reset"
+              class="btn btn-block btn btn-danger"
+              value="cancel"
+              data-dismiss="modal"
+            />
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

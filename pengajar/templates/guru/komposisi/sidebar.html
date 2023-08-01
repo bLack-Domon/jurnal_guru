@@ -1,0 +1,23 @@
+{% load static %}
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'ProfilGuru' %}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Profil</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'JurnalMengajar' %}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Jurnal Pengajar</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'Rekap' %}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Rekapan Jurnal</span>
+            </a>
+          </li>
+        </ul>
+</nav>

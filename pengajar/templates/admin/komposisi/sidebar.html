@@ -1,0 +1,35 @@
+{% load static %}
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'Admin' %}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Profil</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tambahP' %}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Tambah Guru</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'Piket' %}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Tambah Piket</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'Waka' %}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Tambah wakakurikulum</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tahunAkademik' %}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Tahun, Semester, Kelas</span>
+            </a>
+          </li>
+        </ul>
+</nav>
